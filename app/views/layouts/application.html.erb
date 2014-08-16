@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>EayunDM</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+<title>EayunDM</title>
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<%= csrf_meta_tags %>
 </head>
 <body>
+
+<% if user_signed_in? %>
+    <div>
+        Signed in as: <%= current_user.email %>
+        <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+    </div>
+<% else %>
+    <div><%= link_to 'Sign in', new_session_path(User.new) %></div>
+<% end %>
 
 <%= yield %>
 
