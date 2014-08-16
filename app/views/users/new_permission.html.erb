@@ -1,7 +1,7 @@
 <%= form_for @user do |f| %>
-<h2>Add permission to user: </h2>
-<%= f.label :email, "User: " %>
+<h2>Add permission to user: <%= @user.email %></h2>
 
+<label>Role: </label>
 <select name="role_id">
   <%= @roles.each do |role| %>
     <option value="<%= role.id %>"><%= role.name %></option>
