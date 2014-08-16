@@ -56,8 +56,8 @@ class RolesController < ApplicationController
 
 
   def exclude_operation
-    operation = Operation.find(params[:operation_id])
-    operation.destroy
+    role_operation = RoleOperation.where( :operation_id => params[:operation_id], :role_id => params[:id] ).first
+    role_operation.destroy
 
     redirect_to role_path(Role.find(params[:id]))
   end
