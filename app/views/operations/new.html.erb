@@ -1,0 +1,10 @@
+<h2>New operation</h2>
+<%= form_for @operation, :url => operations_path do |f| %>
+  <%= f.label :name, "Name" %>
+  <%= f.text_field :name %>
+
+  <%= f.label :desc, "Description" %>
+  <%= f.text_field :desc %>
+
+  <%= f.submit "Create" %>
+<% end %>

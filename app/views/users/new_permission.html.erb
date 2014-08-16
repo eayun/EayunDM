@@ -1,0 +1,14 @@
+<%= form_for @user do |f| %>
+<h2>Add permission to user: </h2>
+<%= f.label :email, "User: " %>
+
+<select name="role_id">
+  <%= @roles.each do |role| %>
+    <option value="<%= role.id %>"><%= role.name %></option>
+  <% end %>
+</select>
+
+<p>TODO: query resources<p>
+
+<%= f.submit "New permission" %>
+<% end %>

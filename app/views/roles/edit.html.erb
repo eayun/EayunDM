@@ -1,0 +1,11 @@
+<h2>Edit role</h2>
+
+<%= form_for @role, :url => role_path(@role), :method => :put do |f| %>
+  <%= f.label :name, "Name" %>
+  <%= f.text_field :name %>
+
+  <%= f.label :desc, "Description" %>
+  <%= f.text_field :desc %>
+
+  <%= f.submit "Update" %>
+<% end %>

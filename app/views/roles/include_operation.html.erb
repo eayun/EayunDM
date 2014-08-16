@@ -1,0 +1,11 @@
+<h2>Include operation to role</h2>
+
+<%= form_for @role do |f| %>
+<%= f.label :name, "Role name" %>
+<select name="operation_id">
+  <%= @operations.each do |operation| %>
+    <option value="<%= operation.id %>"><%= operation.name %></option>
+  <% end %>
+</select>
+<%= f.submit 'Include this operation' %>
+<% end %>

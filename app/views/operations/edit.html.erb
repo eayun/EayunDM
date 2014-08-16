@@ -1,0 +1,11 @@
+<h2>Edit operation</h2>
+
+<%= form_for @operation, :url => operation_path(@operation), :method => :put do |f| %>
+  <%= f.label :name, "Name" %>
+  <%= f.text_field :name %>
+
+  <%= f.label :desc, "Description" %>
+  <%= f.text_field :desc %>
+
+  <%= f.submit "Update" %>
+<% end %>

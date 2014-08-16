@@ -1,0 +1,11 @@
+<h2>New role</h2>
+
+<%= form_for @role, :url => roles_path do |f| %>
+  <%= f.label :name, "Name" %>
+  <%= f.text_field :name %>
+
+  <%= f.label :desc, "Description" %>
+  <%= f.text_field :desc %>
+
+  <%= f.submit "Create" %>
+<% end %>
