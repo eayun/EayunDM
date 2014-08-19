@@ -40,5 +40,7 @@ gem 'spring',        group: :development
 
 gem 'devise'
 
+gem 'rest-client'
+
 # for Ubuntu & CentOS...
 gem 'therubyracer'
