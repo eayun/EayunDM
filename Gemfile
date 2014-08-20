@@ -44,3 +44,5 @@ gem 'rest-client'
 
 # for Ubuntu & CentOS...
 gem 'therubyracer'
+
+gem 'cancan'

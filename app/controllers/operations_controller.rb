@@ -1,4 +1,6 @@
 class OperationsController < ApplicationController
+  authorize_resource :class => false
+
   def index
     @operations = Operation.all
   end
@@ -39,6 +41,6 @@ class OperationsController < ApplicationController
 
 
   def operation_params
-    params.require(:operation).permit(:name, :desc)
+    params.require(:operation).permit(:name, :action_name, :resource_class, :desc)
   end
 end

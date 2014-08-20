@@ -6,7 +6,7 @@
 <% @permissions.each do |permission| %>
   <li>
   <%= Role.find(permission.role_id).name %>
-  <%= permission.resource_id %>
+  <%= permission.resource_class %>
   <%= link_to 'Delete', :controller => 'users', :action => :destroy_permission, :id => @user.id, :permission_id => permission.id %>
   </li>
 <% end %>

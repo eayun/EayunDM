@@ -1,4 +1,6 @@
 class RolesController < ApplicationController
+  authorize_resource :class => false
+
   def index
     @roles = Role.all
   end

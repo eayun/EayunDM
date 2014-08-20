@@ -11,19 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140815060756) do
+ActiveRecord::Schema.define(version: 20140820014122) do
 
   create_table "operations", force: true do |t|
     t.string   "name"
     t.string   "desc"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "action_name"
+    t.string   "resource_class"
   end
 
   create_table "permissions", force: true do |t|
     t.integer  "role_id"
     t.integer  "user_id"
-    t.string   "resource_id"
+    t.string   "resource_class"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  authorize_resource :class => false
+
   def index
     @users = User.all
   end
@@ -10,7 +12,7 @@ class UsersController < ApplicationController
       permission = Permission.new
       permission.user_id = params[:id]
       permission.role_id = params[:role_id]
-      permission.resource_id = 'haha'
+      permission.resource_class = params[:resource_class]
       permission.save
     end
 

@@ -4,6 +4,8 @@
 <% @operations.each do |operation| %>
   <li>
   <%= operation.name %>
+  <%= operation.action_name %>
+  <%= operation.resource_class %>
   <%= link_to 'Edit', edit_operation_path(operation) %>
   <%= link_to 'Delete', operation_path(operation), :method => :delete %>
   </li>
