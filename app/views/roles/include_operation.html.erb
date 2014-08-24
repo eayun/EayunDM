@@ -1,7 +1,21 @@
-<h2>Include operation to role</h2>
+<%= content_for :index do %>
+  <% @roles.each do |role| %>
+  <li class="<%= "active" if @role == role %>">
+    <%= link_to role.name, role_path(role) %>
+  </li>
+  <% end %>
+<% end %>
+
+<%= content_for :breadcrumb do %>
+  <li><%= link_to self.controller_name, roles_path %></li>
+  <li><%= link_to_unless_current @role.name, role_path(@role) %></li>
+  <li><%= link_to_unless_current 'include operation', :controller => :roles, :action => :include_operation %></li>
+<% end %>
+
+<h2>Include operation to role: <%= @role.name %></h2>
 
 <%= form_for @role do |f| %>
-<%= f.label :name, "Role name" %>
+<%= f.label :name, "Operation name: " %>
 <select name="operation_id">
   <%= @operations.each do |operation| %>
     <option value="<%= operation.id %>"><%= operation.name %></option>

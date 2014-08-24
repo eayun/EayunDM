@@ -1,3 +1,18 @@
+<%= content_for :title do %><%= @role.name %><% end %>
+
+<%= content_for :index do %>
+  <% @roles.each do |role| %>
+  <li class="<%= "active" if @role == role %>">
+    <%= link_to role.name, role_path(role) %>
+  </li>
+  <% end %>
+<% end %>
+
+<%= content_for :breadcrumb do %>
+  <li><%= link_to self.controller_name, roles_path %></li>
+  <li><%= link_to_unless_current @role.name, role_path(@role) %></li>
+<% end %>
+
 <h2>Role detail</h2>
 <%= @role.name %>
 <%= @role.desc %>
@@ -14,4 +29,4 @@
 <p><%= link_to 'Include operation', :controller => 'roles', :action => :include_operation, :id => @role.id %></p>
 </ul>
 
-<p><%= link_to 'Back to index', roles_path %></p>
+<p><%= link_to 'Delete this role', role_path(@role), :method => :delete %></p>

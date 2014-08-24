@@ -1,0 +1,22 @@
+<%= content_for :title do %><%= @operation.name %><% end %>
+
+<%= content_for :index do %>
+      <% @operations.each do |operation| %>
+        <li class="<%= "active" if @operation == operation %>">
+      <%= link_to operation.name, operation_path(operation) %>
+    </li>
+  <% end %>
+<% end %>
+
+<%= content_for :breadcrumb do %>
+  <li><%= link_to self.controller_name, operations_path %></li>
+  <li><%= link_to_unless_current @operation.name, operation_path(@operation) %></li>
+<% end %>
+
+<h2>Operation detail</h2>
+<%= @operation.name %>
+<%= @operation.desc %>
+<%= @operation.action_name %>
+<%= @operation.resource_class %>
+
+<p><%= link_to 'Delete this operation', operation_path(@operation), :method => :delete %></p>

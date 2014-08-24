@@ -8,6 +8,7 @@ class RolesController < ApplicationController
 
   def new
     @role = Role.new
+    @roles = Role.all
   end
 
 
@@ -45,6 +46,7 @@ class RolesController < ApplicationController
 
   def show
     @role = Role.find(params[:id])
+    @roles = Role.all
     @operations = Role.find(params[:id]).operations
   end
 
@@ -67,6 +69,7 @@ class RolesController < ApplicationController
 
   def include_operation
     @operations = Operation.all
+    @roles = Role.all
     @role = Role.find(params[:id])
   end
 

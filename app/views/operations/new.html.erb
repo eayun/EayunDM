@@ -1,4 +1,18 @@
-<h2>New operation</h2>
+<%= content_for :title do %>New operation<% end %>
+
+<% content_for :breadcrumb do %>
+  <li><%= link_to_unless_current self.controller_name, operations_path %></li>
+  <li><%= link_to_unless_current "new operation", new_operation_path %></li>
+<% end %>
+
+<%= content_for :index do %>
+  <% @operations.each do |operation| %>
+    <li>
+      <%= link_to operation.name, operation_path(operation) %>
+    <li>
+  <% end %>
+<% end %>
+
 <%= form_for @operation, :url => operations_path do |f| %>
   <%= f.label :name, "Name" %>
   <%= f.text_field :name %>

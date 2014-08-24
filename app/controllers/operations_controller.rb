@@ -8,6 +8,7 @@ class OperationsController < ApplicationController
 
   def new
     @operation = Operation.new
+    @operations = Operation.all
   end
 
 
@@ -19,16 +20,9 @@ class OperationsController < ApplicationController
   end
 
 
-  def edit
+  def show
     @operation = Operation.find(params[:id])
-  end
-
-
-  def update
-    @operation = Operation.find(params[:id])
-    @operation.update_attributes(operation_params)
-
-    redirect_to operations_url
+    @operations = Operation.all
   end
 
 

@@ -1,0 +1,27 @@
+<%= content_for :title do %>New user<% end %>
+
+<% content_for :breadcrumb do %>
+  <li><%= link_to_unless_current self.controller_name, users_path %></li> 
+  <li><%= link_to_unless_current "new user", new_user_path %></li> 
+<% end %>
+
+<%= content_for :index do %>
+  <% @users.each do |user| %>
+    <li>
+      <%= link_to user.email, user_path(user) %>
+    <li>
+  <% end %>
+<% end %>
+
+<%= form_for @user, :url => users_path do |f| %>
+  <%= f.label :email, "email" %>
+  <%= f.text_field :email %>
+
+  <%= f.label :password, "password" %>
+  <%= f.text_field :password %>
+
+  <%= f.label :password_confirmation, "confirm password" %>
+  <%= f.text_field :password_confirmation %>
+
+  <%= f.submit "Create" %>
+<% end %>

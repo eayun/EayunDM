@@ -1,13 +1,15 @@
-<h2>List of roles</h2>
+<%= content_for :title do %>Roles<% end %>
 
-<ul>
-<% @roles.each do |role| %>
-  <li>
-  <%= link_to role.name, role_path(role) %>
-  <%= link_to 'Edit', edit_role_path(role) %>
-  <%= link_to 'Delete', role_path(role), :method => :delete %>
-  </li>
+<%= content_for :breadcrumb do %>
+  <li><%= link_to self.controller_name, roles_path %></li>
 <% end %>
-</ul>
+
+<%= content_for :index do %>
+    <% @roles.each do |role| %>
+      <li>
+      <%= link_to role.name, role_path(role) %>
+    </li>
+  <% end %>
+<% end %>
 
 <%= link_to 'New role', new_role_path %>

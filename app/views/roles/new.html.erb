@@ -1,4 +1,17 @@
-<h2>New role</h2>
+<%= content_for :title do %>New role<% end %>
+
+<% content_for :breadcrumb do %>
+  <li><%= link_to_unless_current self.controller_name, roles_path %></li>
+  <li><%= link_to_unless_current "new role", new_role_path %></li>
+<% end %>
+
+<%= content_for :index do %>
+  <% @roles.each do |role| %>
+    <li>
+      <%= link_to role.name, role_path(role) %>
+    <li>
+  <% end %>
+<% end %>
 
 <%= form_for @role, :url => roles_path do |f| %>
   <%= f.label :name, "Name" %>

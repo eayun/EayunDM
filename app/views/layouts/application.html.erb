@@ -1,23 +1,141 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>EayunDM</title>
-<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-<%= csrf_meta_tags %>
+  <title>EayunDM</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
 </head>
 <body>
 
 <% if user_signed_in? %>
-    <div>
-        Signed in as: <%= current_user.email %>
-        <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+
+<nav class="navbar navbar-default navbar-pf" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">EayunDM</a>
     </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-utility">
+        <li class="dropdown">
+          <%= link_to '#', class: "dropdown-toggle", data: {toggle: "dropdown"} do %>
+            <span class="pficon pficon-user"></span>
+            <%= current_user.email %><b class="caret"></b>
+          <% end %>
+          <ul class="dropdown-menu">
+            <li>
+              <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-primary">
+      <% DIVISIONS.each do |k, v| %>
+        <% if v.size > 1 %>
+        <li class="<%= ("dropdown context" + " active" if v.include?(self.controller_name.to_sym)) %>">
+          <%= link_to '#', {class: "dropdown-toggle", data: {toggle: "dropdown"}} do%>
+          <%= k %>
+            <b class="caret"></b>
+          <% end %>
+          <ul class="dropdown-menu">
+          <% v.each do |sv| %>
+            <li>
+            <%= link_to sv, {controller: sv, action: :index} %>
+            </li>
+          <% end %>
+          </ul>
+        </li>
+        <% else %>
+        <li class="<%= ("active" if k == self.controller_name.to_sym) %>">
+          <%= link_to k, {controller: k, action: :index} %>
+        </li>
+        <% end %>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-9 col-md-10 col-sm-push-3 col-md-push-2">
+      <ol class="breadcrumb">
+        <li><a href="/">HOME</a></li>
+        <%= yield :breadcrumb %>
+      </ol>
+      <h1><%= yield :title %></h1>
+      <ul class="nav nav-tabs">
+        <%= yield :tabs %>
+      </ul>
+      <p></p>
+      <%= yield %>
+    </div>
+    <div class="col-sm-3 col-md-2 col-sm-pull-9 col-md-pull-10 sidebar-pf sidebar-pf-left">
+      <form role="form" class="search-pf">
+        <div class="form-group has-clear">
+          <div class="search-pf-input-group">
+            <label for="search1" class="sr-only">Search</label>
+            <input id="search1" type="search" class="form-control" placeholder="Search">
+            <button type="button" class="clear" aria-hidden="true"><span class="pficon pficon-close"></span></button>
+            <button id="search" type="button" class="clear" aria-hidden="true"><span class="fa fa-search"></span></button>
+          </div>
+        </div>
+      </form>
+      <script>
+        (function($) {
+          $(document).ready(function() {
+            // Hide the clear button
+            $(".search-pf .clear").hide($(this).prev('input').val());
+            $("#search").show();
+            // Show the clear button upon entering text in the search input
+            $(".search-pf .has-clear .form-control").keyup(function () {
+              var t = $(this);
+              t.next('button').toggle(Boolean(t.val()));
+              $('#search').toggle(!Boolean(t.val()));
+              query = t.val().toUpperCase();
+              items = document.getElementById("resources").getElementsByTagName("li");
+              for (i = 0; i < items.length; i++) {
+                if (items[i].getElementsByTagName("a")[0].innerHTML.toUpperCase().indexOf(query) == -1) {
+                  items[i].style.display = "none";
+                } else {
+                  items[i].style.display = "";
+                }
+              }
+            });
+            // Upon clicking the clear button, empty the entered text and hide the clear button
+            $(".search-pf .clear").click(function () {
+              $(this).prev('input').val('').focus();
+              $(this).hide();
+              $('#search').show();
+              items = document.getElementById("resources").getElementsByTagName("li");
+              for (i = 0; i < items.length; i++) {
+                items[i].style.display = "";
+              }
+            });
+          });
+        })(jQuery);
+      </script>
+      <ul id="resources" class="nav nav-pills nav-stacked">
+        <%= yield :index %>
+      </ul>
+    </div>
+  </div>
+</div>
+
 <% else %>
-    <div><%= link_to 'Sign in', new_session_path(User.new) %></div>
-<% end %>
 
 <%= yield %>
+
+<% end %>
 
 </body>
 </html>

@@ -1,5 +1,17 @@
-<h2>User detail</h2>
-<%= @user.email %>
+<%= content_for :title do %><%= @user.email %><% end %>
+
+<%= content_for :breadcrumb do %>
+  <li><%= link_to self.controller_name, users_path %></li> 
+  <li><%= link_to_unless_current @user.email, user_path(@user) %></li> 
+<% end %>
+
+<%= content_for :index do %>
+  <% @users.each do |user| %>
+    <li class="<%= "active" if @user == user %>">    
+      <%= link_to user.email, user_path(user) %>
+    </li>   
+  <% end %>
+<% end %>
 
 <h3>Permissions:</h3>
 <ul>
@@ -13,4 +25,4 @@
 <p><%= link_to 'Add permission', :controller => 'users', :action => :new_permission, :id => @user.id %></p>
 </ul>
 
-<p><%= link_to 'Back to index', users_path %></p>
+<p><%= link_to 'Delete this user', user_path(@user), :method => :delete %></p>
