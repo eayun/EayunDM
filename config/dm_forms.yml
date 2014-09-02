@@ -1,0 +1,52 @@
+:new_owner:
+  :key:
+    :label: "Key"
+  :displayName:
+    :label: "DisplayName"
+  :contentPrefix:
+    :label: "Content Prefix"
+  :password:
+    :label: "Password"
+    :type: :password
+
+:new_subscription:
+  :product:
+    :label: "Product"
+    :type: :select
+    :choices:
+  :quantity:
+    :label: "Quantity"
+  :startDate:
+    :label: "Start Date"
+  :endDate:
+    :label: "End Date"
+  :contractNumber:
+    :label: "Contract Number"
+
+:new_product:
+  :name:
+    :label: "Name"
+  :multiplier:
+    :label: "Multiplier"
+
+:new_content:
+  :name:
+    :label: "Name"
+  :label:
+    :label: "Label"
+  :contentUrl:
+    :label: "Content URL"
+  :type:
+    :label: "Type"
+    :type: :select
+    :choices:
+  :vendor:
+    :label: "Vendor"
+    :type: :select
+    :choices:
+
+:attach_content:
+  :content:
+    :label: "Content"
+    :type: :select
+    :choices:
