@@ -1,0 +1,48 @@
+:products:
+  :get:
+    - :self
+  :post:
+    - :self
+    - :content
+  :delete:
+    - :self
+    - :content
+:owners:
+  :get:
+    - :self
+    - :subscriptions
+    - :consumers
+  :post:
+    - :self
+  :put:
+    - :self
+    - :subscriptions
+  :delete:
+    - :self
+:consumers:
+  :get:
+    - :self
+:subscriptions:
+  :delete:
+    - :self
+:content:
+  :get:
+    - :self
+  :post:
+    - :self
+  :delete:
+    - :self
+:roles:
+  :post:
+    - :self
+    - :users
+    - :permissions
+  :delete:
+    - :self
+:users:
+  :post:
+    - :self
+  :delete:
+    - :self
+  :get:
+    - :roles
