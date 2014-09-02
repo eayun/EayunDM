@@ -1,0 +1,8 @@
+<% owner = @ret[:current] %>
+
+<p>id: <%= owner['id'] %></p>
+<p>key: <%= owner['key'] %></p>
+<p>displayName: <%= owner['displayName'] %></p>
+<p>href: <%= owner['href'] %></p>
+
+<%= button_to "delete this owner", current_path(cur_id_helper), :method => :delete, :class => "btn btn-danger" %>

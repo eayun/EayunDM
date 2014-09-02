@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :contents
   end
   resources :contents
+  resources :owners
 
   get "dashboard" => "dashboard#index"
   root :to => "dashboard#index"
