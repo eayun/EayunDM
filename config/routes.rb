@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     resources :contents
   end
   resources :contents
-  resources :owners
+  resources :owners do
+    resources :subscriptions
+  end
 
   get "dashboard" => "dashboard#index"
   root :to => "dashboard#index"

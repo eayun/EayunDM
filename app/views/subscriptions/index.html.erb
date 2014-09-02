@@ -1,0 +1,28 @@
+<% subscriptions = @ret[:currents] %>
+
+<%= render :partial => "common/collapse_form",
+           :locals => {
+             :collapse => @ret[:currents].length > 0,
+             :form_fields => @ret[:extra][:form]
+           } %>
+
+<% if subscriptions.length > 0 %>
+<%= render :partial => "common/table",
+           :locals => {
+             :rows => subscriptions,
+             :columns => {
+               :ID => lambda {|s| s["id"]},
+               :Product => lambda {|s| link_to s["product"]["name"], product_path(s["product"]["id"])},
+               :Quantity => lambda {|s| s["quantity"]},
+               :Consumed => lambda {|s| s["consumed"]},
+               :"Start Date" => lambda {|s| s["startDate"]},
+               :"End Date" => lambda {|s| s["endDate"]},
+               :"Contract Number" => lambda {|s| s["contractNumber"]},
+             },
+             :extra_columns => {
+               :DELETE => lambda do |s|
+                 button_to "delete", secondary_path(pri_id_helper, s[cur_id_selector]), :method => :delete, :class => "btn btn-danger"
+               end
+             }
+           } %>
+<% end %>
