@@ -40,9 +40,11 @@ gem 'spring',        group: :development
 
 gem 'devise'
 
+gem 'cancan'
+
 gem 'rest-client'
 
 # for Ubuntu & CentOS...
 gem 'therubyracer'
 
-gem 'cancan'
+gem 'json'
