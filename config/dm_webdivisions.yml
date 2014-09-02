@@ -1,0 +1,11 @@
+:dashboard:
+  - :dashboard
+:owners:
+  - :owners
+  - :subscriptions
+  - :consumers
+:products:
+  - :products
+  - :contents
+:contents:
+  - :contents
