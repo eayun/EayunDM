@@ -37,25 +37,9 @@
       </ul>
       <ul class="nav navbar-nav navbar-primary">
       <% DIVISIONS.each do |k, v| %>
-        <% if v.size > 1 %>
-        <li class="<%= ("dropdown context" + " active" if v.include?(self.controller_name.to_sym)) %>">
-          <%= link_to '#', {class: "dropdown-toggle", data: {toggle: "dropdown"}} do%>
-          <%= k %>
-            <b class="caret"></b>
-          <% end %>
-          <ul class="dropdown-menu">
-          <% v.each do |sv| %>
-            <li>
-            <%= link_to sv, {controller: sv, action: :index} %>
-            </li>
-          <% end %>
-          </ul>
+        <li class="<%= "active" if (((not @ret[:primary].nil?) && k.to_s == r_name_primaries) || (@ret[:primary].nil? && k.to_s == r_name_currents)) %>">
+          <%= link_to k, self.method("#{k}_path").call %>
         </li>
-        <% else %>
-        <li class="<%= ("active" if k == self.controller_name.to_sym) %>">
-          <%= link_to k, {controller: k, action: :index} %>
-        </li>
-        <% end %>
       <% end %>
       </ul>
     </div>
