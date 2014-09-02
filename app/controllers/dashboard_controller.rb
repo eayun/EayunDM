@@ -1,6 +1,8 @@
 class DashboardController < ApplicationController
   authorize_resource :class => false
 
-  def index
+  protected
+  def get_currents
+    []
   end
 end
