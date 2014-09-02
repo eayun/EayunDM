@@ -1,0 +1,5 @@
+development:
+  :baseurl: "http://127.0.0.1:8080/candlepin"
+  :cp_username: "admin"
+  :cp_password: "admin"
+  :cp_user_pwd_salt: "b669e3274a43f20769d3dedf03e9ac180e160f92"
