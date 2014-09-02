@@ -1,0 +1,31 @@
+<% product_contents = @ret[:primary]['productContent'] %>
+
+<%= render :partial => "common/collapse_form",
+           :locals => {
+             :title => "Attach content",
+             :button_info => "Attach",
+             :collapse => product_contents.length > 0,
+             :form_fields => @ret[:extra][:form]
+           } %>
+
+<% if product_contents.length > 0 %>
+<%= render :partial => "common/table",
+           :locals => {
+             :rows => product_contents,
+             :columns => {
+               :ID => lambda {|c| c["content"]["id"]},
+               :Type => lambda {|c| c["content"]["type"]},
+               :Label => lambda {|c| c["content"]["label"]},
+               :Name => lambda {|c| c["content"]["name"]},
+               :Vendor => lambda {|c| c["content"]["vendor"]},
+               :"Content URL" => lambda {|c| c["content"]["contentUrl"]},
+               :"GPG URL" => lambda {|c| c["content"]["gpgUrl"]},
+               :Enabled => lambda {|c| c["enabled"]},
+             },
+             :extra_columns => {
+               :Detach => lambda do |c|
+                 button_to "detach", secondary_path(pri_id_helper, c["content"]["id"]), :data => {:confirm => "Are you 确定？"}, :method => :delete, :class => "btn btn-danger"
+               end
+             }
+           } %>
+<% end %>

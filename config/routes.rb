@@ -4,7 +4,12 @@ Rails.application.routes.draw do
   resources :roles
   resources :operations
 
-  resources :products
+  post "products/:product_id/contents" => "contents#attach"
+  delete "products/:product_id/contents/:id" => "contents#detach"
+  resources :products do
+    resources :contents
+  end
+  resources :contents
 
   get "dashboard" => "dashboard#index"
   root :to => "dashboard#index"

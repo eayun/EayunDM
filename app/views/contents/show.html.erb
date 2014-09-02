@@ -1,0 +1,11 @@
+<% content = @ret[:current] %>
+
+<p>id: <%= content["id"] %></p>
+<p>type: <%= content["type"] %></p>
+<p>label: <%= content["label"] %></p>
+<p>name: <%= content["name"] %></p>
+<p>vendor: <%= content["vendor"] %></p>
+<p>contentUrl: <%= content["contentUrl"] %></p>
+<p>gpgUrl: <%= content["gpgUrl"] %></p>
+
+<%= button_to "delete this content", current_path(cur_id_helper), :method => :delete, :class => "btn btn-danger" %>
