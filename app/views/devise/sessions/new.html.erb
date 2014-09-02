@@ -8,7 +8,7 @@
                 <%= image_tag("eayunDMtheme.png", :alt => "EayunDMtheme") %>
             </div>
         </div>
-        <div class="col-sm-7 col-md-6 col-lg-5 login">
+        <div class="col-sm-7 col-md-6 col-lg-5 login" style="position:relative; left:20px;">
             <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-horizontal", role: "form"} ) do |f| %>
                 <div class="form-group">
                     <%= f.label :email, class: "col-sm-2 control-md-2 control-label"%>
@@ -29,14 +29,14 @@
                                 <%= f.label :remember_me %>
                                 <%= f.check_box :remember_me %>
                             </div>
+                            <span class="help-block">
+                                <%= render "devise/shared/links" %>
+                            </span>
                         </div>
                     <% end %>
-                    <span class="help-block">
-                        <%= render "devise/shared/links" %>
-                    </span>
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 submit">
-                    <%= f.submit "Log in", class:"btn btn-primary btn-lg" %>
+                    <div class="col-xs-4 col-sm-4 col-md-4 submit">
+                        <%= f.submit "Log in", class:"btn btn-primary btn-lg" %>
+                    </div>
                 </div>
             <% end %>
         </div>
