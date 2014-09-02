@@ -12,7 +12,6 @@
  *
  *= require bootstrap.min
  *= require patternfly.min
- *= require jquery.dataTables
  *= require_tree .
  *= require_self
  */
