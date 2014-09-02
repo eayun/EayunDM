@@ -1,0 +1,31 @@
+<% unless @ret[:primary].nil? && @ret[:current].nil? %>
+  <% tabs = [] %>
+  <% if not @ret[:primary].nil? %>
+    <% primary_r = r_name_primaries.to_sym %>
+    <% tabs << {:active => false,
+                :name => "Overview",
+                :path => primary_path(pri_id_helper)} %>
+    <% DIVISIONS[primary_r].each do |secondary_r| %>
+      <% next if secondary_r == primary_r %>
+      <% tabs << {:active => secondary_r == self.controller_name.to_sym,
+                  :name => secondary_r,
+                  :path => pri_offspring_path(secondary_r.to_s, pri_id_helper)} %>
+    <% end %>
+  <% elsif not @ret[:current].nil? %>
+    <% primary_r = self.controller_name.to_sym %>
+    <% tabs << {:active => true,
+                :name => "Overview",
+                :path => current_path(cur_id_helper)} %>
+    <% DIVISIONS[primary_r].each do |secondary_r| %>
+      <% next if secondary_r == primary_r %>
+      <% tabs << {:active => false,
+                  :name => secondary_r,
+                  :path => offspring_path(secondary_r.to_s, cur_id_helper)} %>
+    <% end %>
+  <% end %>
+<ul class="nav nav-tabs">
+  <% tabs.each do |tab| %>
+    <li class="<%= "active" if tab[:active] %>"><%= link_to tab[:name], tab[:path] %></li>  
+  <% end %>
+</ul>
+<% end %>

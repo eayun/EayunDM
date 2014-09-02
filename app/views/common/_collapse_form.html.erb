@@ -1,0 +1,43 @@
+<% title ||= "New " + r_name_current %>
+<% form_path ||= (@ret[:primary].nil?)?(currents_path):(secondaries_path(pri_id_helper)) %>
+<% button_info ||= "Create" %>
+<% collapse = (collapse.nil?)?false:collapse %>
+
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+          <%= title %>
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse<%= " in" unless collapse %>">
+      <div class="panel-body">
+<%= form_tag(form_path, :class => "form-horizontal") do %>
+  <% form_fields.each do |key, field| %>
+  <div class="form-group">
+  <%= label_tag field[:label], nil, :class => "col-sm-2 control-label" %>
+  <div class="col-sm-4">
+  <% case field[:type] %>
+    <% when nil, :text %>
+      <%= text_field_tag key, field[:default], :class => "form-control" %>
+    <% when :password %>
+      <%= password_field_tag key, nil, :class => "form-control" %>
+    <% when :select %>
+      <% if field[:choices].length > 0 %>
+        <%= select_tag key, options_for_select(field[:choices]), :class => "form-control" %>
+      <% else %>
+        <div class="form-control">Not-available selections!</div>
+      <% end %>
+  <% end %>
+  </div>
+  </div>
+  <% end %>
+<%= submit_tag button_info, :class => "btn btn-primary" %>
+<% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

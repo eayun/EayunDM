@@ -1,0 +1,17 @@
+<ol class="breadcrumb">
+
+  <li><a href="/">HOME</a></li>
+
+<% if @ret[:primary].nil? %>
+  <li><%= link_to_unless_current r_name_currents, currents_path %></li>
+<% else %>
+  <li><%= link_to r_name_primaries, primaries_path %></li>
+  <li><%= link_to pri_display_helper, primary_path(pri_id_helper) %></li>
+  <li><%= link_to_unless_current r_name_currents, secondaries_path(pri_id_helper) %></li>
+<% end %>
+
+<% unless @ret[:current].nil? %>
+  <li><%= cur_display_helper %></li>
+<% end %>
+
+</ol>

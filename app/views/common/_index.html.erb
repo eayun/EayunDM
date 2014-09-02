@@ -1,0 +1,15 @@
+<ul id="resources" class="nav nav-pills nav-stacked">
+<% if @ret[:primaries].nil? %>
+  <% @ret[:currents].each do |one| %>
+    <li class="<%= "active" if self.action_name != "index" && one[cur_id_selector] == cur_id_helper %>">
+    <%= link_to one[cur_display_selector], current_path(one[cur_id_selector]) %>
+    </li>
+  <% end %>
+<% else %>
+  <% @ret[:primaries].each do |one| %>
+    <li class="<%= "active" if one[pri_id_selector] == pri_id_helper %>">
+    <%= link_to one[pri_display_selector], primary_path(one[pri_id_selector]) %>
+    <li>
+  <% end %>
+<% end %>
+</ul>

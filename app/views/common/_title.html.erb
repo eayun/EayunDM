@@ -1,0 +1,9 @@
+<h1>
+<% if not @ret[:primary].nil? %>
+  <%= pri_display_helper %>
+<% elsif self.action_name == "index" %>
+  <%= self.controller_name %>
+<% else %>
+  <%= cur_display_helper %>
+<% end %>
+</h1>
