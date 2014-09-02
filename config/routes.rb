@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
   resources :contents
   resources :owners do
+    resources :consumers
     resources :subscriptions
   end
 

@@ -1,0 +1,42 @@
+<% consumers = @ret[:currents] %>
+
+<% if consumers.length > 0 %>
+<%= render :partial => "common/table",
+           :locals => {
+             :rows => consumers,
+             :columns => {
+               :UUID => lambda {|c| c["uuid"]},
+               :Name => lambda {|c| c["name"]},
+               :Username => lambda {|c| c["username"]},
+               :Type => lambda {|c| c["type"]["label"]},
+               :"Entitlement Status" => lambda {|c| c["entitlementStatus"]},
+               :"Entitlement Count" => lambda {|c| c["entitlementCount"]},
+               :"Last Checkin" => lambda {|c| c["lastCheckin"]},
+             },
+             :extra_columns => {
+               :Details => lambda do |c|
+                 link_to secondary_path(pri_id_helper, c[cur_id_selector]), :remote => true, :class => "infopopover btn btn-primary", :id => "consumer_" + c["id"], "data-type" => "script", "data-toggle" => "popover" do
+                   raw %(<span class="pficon pficon-info"/>)
+                 end
+               end
+             }
+           } %>
+<% end %>
+<script>
+  $(document).ready(function() {
+    // Initialize Popovers
+    // copycat of PatternFly.popovers('[data-toggle=popover]')
+    var infoPopovers = $('.infopopover');
+    infoPopovers.popover({
+      html: true,
+      trigger: 'manual',
+      placement: 'left',
+    });
+    infoPopovers.each(function(index, element) {
+      $(element).attr('data-original-title', '详细信息<button type="button" class="close" aria-hidden="true" onclick="infoPopoverHide()"><span class="pficon pficon-close"></span></button>');
+    });
+  });
+  function infoPopoverHide() {
+    $('.infopopover').popover('hide');
+  }
+</script>

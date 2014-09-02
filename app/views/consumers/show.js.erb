@@ -1,0 +1,8 @@
+$("<%= "#consumer_#{@consumer['id']}" %>").attr('data-content', "<%= j(render :partial => 'info', :locals => {:consumer => @consumer}) %>");
+$(".infopopover").each (function(index, element) {
+  if ($(element).attr("id") == "<%= "consumer_#{@consumer['id']}" %>") {
+    $(element).popover('toggle');
+  } else {
+    $(element).popover('hide');
+  }
+});

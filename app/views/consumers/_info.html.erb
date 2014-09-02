@@ -1,0 +1,30 @@
+<% if consumer['installedProducts'].length > 0 %>
+<p>已安装的产品</p>
+<ul>
+  <% consumer['installedProducts'].each do |product| %>
+  <li>
+    <%= link_to product['productName'], product_path(product['productId']) %>
+  </li>
+  <% end %>
+</ul>
+<% end %>
+<% facts = consumer['facts'] %>
+<h3>CPU 信息</h3>
+<p>CPU 数: <%= facts['cpu.cpu(s)'] %></p>
+<p>CPU 插槽数： <%= facts['cpu.cpu_socket(s)'] %></p>
+<p>CPU 每插槽核心数： <%= facts['cpu.core(s)_per_socket'] %></p>
+<p>CPU 每核心线程数： <%= facts['cpu.thread(s)_per_core'] %></p>
+
+<h3>系统信息</h3>
+<p>发行版: <%= "#{facts['distribution.name']} #{facts['distribution.version']}" %></p>
+<p>内存: <%= facts['dmi.memory.size'] %></p>
+<p>CPU 架构: <%= facts['lscpu.architecture'] %></p>
+<p>CPU 频率: <%= facts['lscpu.cpu_mhz'] %> MHz</p>
+
+<h3>网络信息</h3>
+<p>主机名: <%= facts['network.hostname'] %></p>
+
+<% if facts['virt.is_guest'] == "true" %>
+<h3>虚拟机</h3>
+<p>宿主机类型: <%= facts['virt.host_type'] %></p>
+<% end %>
