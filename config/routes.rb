@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :roles
   resources :operations
 
+  resources :products
+
   get "dashboard" => "dashboard#index"
   root :to => "dashboard#index"
 

@@ -1,0 +1,14 @@
+<% product = @ret[:current] %>
+
+<p>id: <%= product['id'] %></p>
+<p>name: <%= product['name'] %></p>
+<p>multiplier: <%= product['multiplier'] %></p>
+<p>href: <%= product['href'] %></p>
+<p>attributes:</p>
+<ul>
+<% product['attributes'].each do |attribute| %>
+  <li><%= attribute['name'] %>: <%= attribute['value'] %></li>
+<% end %>
+</ul>
+
+<%= button_to "delete this product", current_path(cur_id_helper), :method => :delete, :class => "btn btn-danger" %>
