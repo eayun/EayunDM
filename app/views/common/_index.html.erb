@@ -1,4 +1,14 @@
 <ul id="resources" class="nav nav-pills nav-stacked">
+<form role="form" class="search-pf">
+  <div class="form-group has-clear">
+    <div class="search-pf-input-group">
+      <label for="search1" class="sr-only">Search</label>
+      <input id="search1" type="search" class="form-control" placeholder="Search">
+      <button type="button" class="clear" aria-hidden="true"><span class="pficon pficon-close"></span></button>
+      <button id="search" type="button" class="clear" aria-hidden="true"><span class="fa fa-search"></span></button>
+    </div>
+  </div>
+</form>
 <% if @ret[:primaries].nil? %>
   <% @ret[:currents].each do |one| %>
     <li class="<%= "active" if self.action_name != "index" && one[cur_id_selector] == cur_id_helper %>">
@@ -12,4 +22,38 @@
     <li>
   <% end %>
 <% end %>
+<script>
+  (function($) {
+    $(document).ready(function() {
+      // Hide the clear button
+      $(".search-pf .clear").hide($(this).prev('input').val());
+      $("#search").show();
+      // Show the clear button upon entering text in the search input
+      $(".search-pf .has-clear .form-control").keyup(function () {
+        var t = $(this);
+        t.next('button').toggle(Boolean(t.val()));
+        $('#search').toggle(!Boolean(t.val()));
+        query = t.val().toUpperCase();
+        items = document.getElementById("resources").getElementsByTagName("li");
+        for (i = 0; i < items.length; i++) {
+          if (items[i].getElementsByTagName("a")[0].innerHTML.toUpperCase().indexOf(query) == -1) {
+            items[i].style.display = "none";
+          } else {
+            items[i].style.display = "";
+          }
+        }
+      });
+      // Upon clicking the clear button, empty the entered text and hide the clear button
+      $(".search-pf .clear").click(function () {
+        $(this).prev('input').val('').focus();
+        $(this).hide();
+        $('#search').show();
+        items = document.getElementById("resources").getElementsByTagName("li");
+        for (i = 0; i < items.length; i++) {
+          items[i].style.display = "";
+        }
+      });
+    });
+  })(jQuery);
+</script>
 </ul>
