@@ -1,26 +1,7 @@
-<%= content_for :breadcrumb do %>
-  <li><%= link_to self.controller_name, users_path %></li>
-  <li><%= link_to_unless_current @user.email, user_path(@user) %></li>
-  <li><%= link_to_unless_current 'add permission', :controller => :users, :action => :new_permission %></li>
-<% end %>
+<h2>Add permission to user: <%= cur_display_helper %></h2>
 
-<%= content_for :index do %>
-  <% @users.each do |user| %>
-    <li class="<%= "active" if @user == user %>">
-      <%= link_to user.email, user_path(user) %>
-    </li>
-  <% end %>
-<% end %>
-
-<%= form_for @user do |f| %>
-<h2>Add permission to user: <%= @user.email %></h2>
-
-<label>Role name: </label>
-<select name="role_id">
-  <%= @roles.each do |role| %>
-    <option value="<%= role.id %>"><%= role.name %></option>
-  <% end %>
-</select>
-
-<%= f.submit "New permission" %>
+<%= form_tag current_path(cur_id_helper), :method => :put do %>
+<%= label_tag "Role name: " %>
+<%= select_tag :role_id, options_for_select(@ret[:extra][:roles].collect {|role| [role.name, role.id]}) %>
+<%= submit_tag 'Include this role' %>
 <% end %>

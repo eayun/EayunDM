@@ -1,28 +1,13 @@
-<%= content_for :title do %><%= @user.email %><% end %>
-
-<%= content_for :breadcrumb do %>
-  <li><%= link_to self.controller_name, users_path %></li> 
-  <li><%= link_to_unless_current @user.email, user_path(@user) %></li> 
-<% end %>
-
-<%= content_for :index do %>
-  <% @users.each do |user| %>
-    <li class="<%= "active" if @user == user %>">    
-      <%= link_to user.email, user_path(user) %>
-    </li>   
-  <% end %>
-<% end %>
-
 <h3>Permissions:</h3>
 <ul>
-<% @permissions.each do |permission| %>
+<% @ret[:extra][:permissions].each do |permission| %>
   <li>
   <%= Role.find(permission.role_id).name %>
   <%= permission.resource_class %>
-  <%= link_to 'Delete', :controller => 'users', :action => :destroy_permission, :id => @user.id, :permission_id => permission.id %>
+  <%= link_to 'Delete', :controller => 'users', :action => :destroy_permission, :id => cur_id_helper, :permission_id => permission.id %>
   </li>
 <% end %>
-<p><%= link_to 'Add permission', :controller => 'users', :action => :new_permission, :id => @user.id %></p>
+<p><%= link_to 'Add permission', :controller => 'users', :action => :new_permission, :id => cur_id_helper %></p>
 </ul>
 
-<p><%= link_to 'Delete this user', user_path(@user), :method => :delete %></p>
+<p><%= link_to 'Delete this user', current_path(cur_id_helper), :method => :delete %></p>

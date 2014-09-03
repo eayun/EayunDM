@@ -41,6 +41,21 @@
           <%= link_to k, self.method("#{k}_path").call %>
         </li>
       <% end %>
+      <% DIVISIONS_USER.each do |k, v| %>
+        <li class="dropdown<%= " context" if %W(users roles operations).include?(self.controller_name) %>">
+          <%= link_to '#', {class: "dropdown-toggle", data: {toggle: "dropdown"}} do%>
+          <%= k %>
+            <b class="caret"></b>
+          <% end %>
+          <ul class="dropdown-menu">
+            <% v.each do |value| %>
+              <li>
+                <%= link_to value, self.method("#{value}_path").call %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
       </ul>
     </div>
 </nav>

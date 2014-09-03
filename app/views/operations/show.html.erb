@@ -1,22 +1,11 @@
-<%= content_for :title do %><%= @operation.name %><% end %>
+<% operation = @ret[:current] %>
 
-<%= content_for :index do %>
-      <% @operations.each do |operation| %>
-        <li class="<%= "active" if @operation == operation %>">
-      <%= link_to operation.name, operation_path(operation) %>
-    </li>
-  <% end %>
-<% end %>
+<h1>Operation detail</h1>
+<ul class="dl-horizontal">
+  <li>Name: <%= operation.name %></li>
+  <li>Description: <%= operation.desc %></li>
+  <li>Action name: <%= operation.action_name %></li>
+  <li>Resource class: <%= operation.resource_class %></li>
+</ul>
 
-<%= content_for :breadcrumb do %>
-  <li><%= link_to self.controller_name, operations_path %></li>
-  <li><%= link_to_unless_current @operation.name, operation_path(@operation) %></li>
-<% end %>
-
-<h2>Operation detail</h2>
-<%= @operation.name %>
-<%= @operation.desc %>
-<%= @operation.action_name %>
-<%= @operation.resource_class %>
-
-<p><%= link_to 'Delete this operation', operation_path(@operation), :method => :delete %></p>
+<p><%= link_to 'Delete this operation', current_path(cur_id_helper), :method => :delete %></p>

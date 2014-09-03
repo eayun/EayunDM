@@ -1,32 +1,19 @@
-<%= content_for :title do %><%= @role.name %><% end %>
-
-<%= content_for :index do %>
-  <% @roles.each do |role| %>
-  <li class="<%= "active" if @role == role %>">
-    <%= link_to role.name, role_path(role) %>
-  </li>
-  <% end %>
-<% end %>
-
-<%= content_for :breadcrumb do %>
-  <li><%= link_to self.controller_name, roles_path %></li>
-  <li><%= link_to_unless_current @role.name, role_path(@role) %></li>
-<% end %>
-
 <h2>Role detail</h2>
-<%= @role.name %>
-<%= @role.desc %>
+<ul>
+<li>Name: <%= @ret[:current].name %></li>
+<li>Description: <%= @ret[:current].desc %></li>
+</ul>
 
 <h3>Included operations:</h3>
 <ul>
-<% @operations.each do |operation| %>
+<% @ret[:extra][:operations].each do |operation| %>
   <li>
   <%= operation.name %>
   <%= operation.desc %>
-  <%= link_to 'Delete', :controller => 'roles', :action => :exclude_operation, :id => @role.id, :operation_id => operation.id %>
+  <%= link_to 'Delete', :controller => 'roles', :action => :exclude_operation, :id => cur_id_helper, :operation_id => operation.id %>
   </li>
 <% end %>
-<p><%= link_to 'Include operation', :controller => 'roles', :action => :include_operation, :id => @role.id %></p>
+<p><%= link_to 'Include operation', :controller => 'roles', :action => :include_operation, :id => cur_id_helper %></p>
 </ul>
 
-<p><%= link_to 'Delete this role', role_path(@role), :method => :delete %></p>
+<p><%= link_to 'Delete this role', current_path(cur_id_helper), :method => :delete %></p>

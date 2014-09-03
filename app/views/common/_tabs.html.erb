@@ -11,7 +11,7 @@
                   :name => secondary_r,
                   :path => pri_offspring_path(secondary_r.to_s, pri_id_helper)} %>
     <% end %>
-  <% elsif not @ret[:current].nil? %>
+  <% elsif not @ret[:current].nil? and not %W(users roles operations).include?(self.controller_name) %>
     <% primary_r = self.controller_name.to_sym %>
     <% tabs << {:active => true,
                 :name => "Overview",

@@ -16,6 +16,15 @@ DIVISIONS.each do |primary, secondaries|
   end
 end
 
+DIVISIONS_USER = YAML.load_file("config/dm_webdivisions_user.yml")
+PRIMARIES_USER = Hash.new
+DIVISIONS_USER.each do |primary, secondaries|
+  secondaries.each do |secondary|
+    next if primary == secondary
+    PRIMARIES_USER[secondary] = primary
+  end
+end
+
 # Content information initialization
 CONTENT_INFO = YAML.load_file("config/eayun_contents.yml")
 

@@ -138,6 +138,7 @@ DEPENDENCIES
   devise
   jbuilder (~> 2.0)
   jquery-rails
+  json
   rails (= 4.1.4)
   rest-client
   sass-rails (~> 4.0.3)

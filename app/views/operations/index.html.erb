@@ -1,15 +1,49 @@
-<%= content_for :title do %>Operations<% end %>
+<button class="btn btn-default" data-toggle="modal" data-target="#myModal">New operation</button>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <span class="pficon pficon-close"></span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Modal Title</h4>
+      </div>
+      <%= form_for @ret[:extra][:operation], :url => operations_path, html: {class: "form-horizontal"} do |f| %>
+      <div class="modal-body">
+        <div class="form-group">
+          <%= f.label :name, "Name: ", class: "col-sm-3 control-label" %>
+          <div class="col-sm-9">
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
+        </div>
 
-<%= content_for :breadcrumb do %>
-  <li><%= link_to self.controller_name, operations_path %></li>
-<% end %>
+        <div class="form-group">
+          <%= f.label :action_name, "Action name: ", class: "col-sm-3 control-label" %>
+          <div class="col-sm-9">
+            <%= f.text_field :action_name, class: "form-control" %>
+          </div>
+        </div>
 
-<%= content_for :index do %>
-    <% @operations.each do |operation| %>
-      <li>
-      <%= link_to operation.name, operation_path(operation) %>
-    </li>
-  <% end %>
-<% end %>
+        <div class="form-group">
+          <%= f.label :resource_class, "Resource class: ", class: "col-sm-3 control-label" %>
+          <div class="col-sm-9">
+            <%= f.text_field :resource_class, class: "form-control" %>
+          </div>
+        </div>
 
-<%= link_to 'New operation', new_operation_path %>
+        <div class="form-group">
+          <%= f.label :desc, "Description: ", class: "col-sm-3 control-label" %>
+          <div class="col-sm-9">
+            <%= f.text_field :desc, class: "form-control" %>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <%= f.submit "Create", class: "btn btn-primary" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

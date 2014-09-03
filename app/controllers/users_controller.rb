@@ -1,17 +1,6 @@
 class UsersController < ApplicationController
   authorize_resource :class => false
 
-  def index
-    @users = User.all
-  end
-
-
-  def new
-    @user = User.new
-    @users = User.all
-  end
-
-
   def create
     User.create!(user_params)
 
@@ -32,14 +21,6 @@ class UsersController < ApplicationController
     redirect_to user_url(@user)
   end
 
-
-  def show
-    @user = User.find(params[:id])
-    @users = User.all
-    @permissions = Permission.all.where( :user_id => params[:id] )
-  end
-
-
   def destroy
     @user = User.find(params[:id])
     @user.destroy
@@ -57,13 +38,41 @@ class UsersController < ApplicationController
 
 
   def new_permission
-    @roles = Role.all
-    @user = User.find(params[:id])
-    @users = User.all
+    prepare
+    @ret.merge!({:current => get_current, :extra => new_permission_extra})
   end
 
 
   def user_params
     params.require(:user).permit( :email, :password, :password_confirmation )
+  end
+
+  protected
+  def secondary_resource?
+    false
+  end
+
+  def get_currents
+    User.all
+  end
+
+  def get_current
+    User.find(params[:id])
+  end
+
+  def index_extra
+    {:user => User.new }
+  end
+
+  def show_extra
+    {:permissions => Permission.all.where( :user_id => params[:id] ) }
+  end
+
+  def new_permission_extra
+    {:roles => Role.all }
+  end
+
+  def cur_id_f
+    {:id => "id", :name => "email"}
   end
 end

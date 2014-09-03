@@ -1,11 +1,6 @@
 class RolesController < ApplicationController
   authorize_resource :class => false
 
-  def index
-    @roles = Role.all
-  end
-
-
   def new
     @role = Role.new
     @roles = Role.all
@@ -44,11 +39,6 @@ class RolesController < ApplicationController
   end
 
 
-  def show
-    @role = Role.find(params[:id])
-    @roles = Role.all
-    @operations = Role.find(params[:id]).operations
-  end
 
 
   def destroy
@@ -68,13 +58,41 @@ class RolesController < ApplicationController
 
 
   def include_operation
-    @operations = Operation.all
-    @roles = Role.all
-    @role = Role.find(params[:id])
+    prepare
+    @ret.merge!({:current => get_current, :extra => include_operation_extra})
   end
 
 
   def role_params
     params.require(:role).permit(:name, :desc)
+  end
+
+  protected
+  def secondary_resource?
+    false
+  end
+
+  def get_currents
+    Role.all
+  end
+
+  def get_current
+    Role.find(params[:id])
+  end
+
+  def index_extra
+    {:role => Role.new}
+  end
+
+  def show_extra
+    {:operations => Role.find(params[:id]).operations}
+  end
+
+  def include_operation_extra
+    {:operations => Operation.all}
+  end
+
+  def cur_id_f
+    {:id => "id", :name => "name"}
   end
 end
