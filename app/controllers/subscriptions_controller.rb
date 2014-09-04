@@ -1,6 +1,8 @@
 require "json"
 
 class SubscriptionsController < ApplicationController
+  authorize_resource :class => false
+
   def create
     subscription = [:quantity, :startDate, :endDate, :contractNumber].map {|k| [k, params[k]]}.to_h
     subscription.merge!({:product => {:id => params[:product]}})

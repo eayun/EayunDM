@@ -1,6 +1,8 @@
 require "json"
 
 class ProductsController < ApplicationController
+  authorize_resource :class => false
+
   def create
     product = [:name, :multiplier].map {|k| [k, params[k]]}.to_h
     product.merge!({:attributes => []})
