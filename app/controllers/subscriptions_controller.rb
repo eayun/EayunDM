@@ -24,6 +24,12 @@ class SubscriptionsController < ApplicationController
   end
 
   def index_extra
+    pools = CANDLEPIN.execute "get_owners_pools", {:id => params[:owner_id]}
+    pools = JSON.parse(pools.to_str).map {|pool| [pool["subscriptionId"], pool["consumed"]]}.to_h
+    @ret[:currents] = @ret[:currents].each do |subscription|
+      subscription["consumed"] = pools[subscription["id"]] || 0
+    end
+
     products = CANDLEPIN.execute "get_products", {}
     products_for_select = JSON.parse(products.to_str).map {|product| [product["name"], product["id"]]}
     form = DM_FORMS[:new_subscription]

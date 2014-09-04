@@ -12,6 +12,7 @@
     - :self
     - :subscriptions
     - :consumers
+    - :pools
   :post:
     - :self
     - :subscriptions
