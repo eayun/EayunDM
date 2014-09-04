@@ -11,4 +11,6 @@
 <% end %>
 </ul>
 
+<%= button_to "download certificate", product_certificate_path(cur_id_helper), :method => :get, :class => "btn btn-primary" %>
+<p/>
 <%= button_to "delete this product", current_path(cur_id_helper), :method => :delete, :class => "btn btn-danger" %>

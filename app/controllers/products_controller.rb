@@ -13,6 +13,11 @@ class ProductsController < ApplicationController
     redirect_to products_url
   end
 
+  def certificate
+    certificate = CANDLEPIN.execute "get_products_certificate", {:id => params[:id]}
+    send_data JSON.parse(certificate.to_str)["cert"], :type => "application/text", :filename => "#{params[:id]}.pem"
+  end
+
   protected
   def self.cur_id_f
     {:id => "id", :name => "name"}

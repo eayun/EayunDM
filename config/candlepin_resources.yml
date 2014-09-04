@@ -1,6 +1,7 @@
 :products:
   :get:
     - :self
+    - :certificate
   :post:
     - :self
     - :content

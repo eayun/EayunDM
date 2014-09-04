@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   post "products/:product_id/contents" => "contents#attach"
   delete "products/:product_id/contents/:id" => "contents#detach"
+  get "products/:id/certificate" => "products#certificate", as: :product_certificate
   resources :products do
     resources :contents
   end
