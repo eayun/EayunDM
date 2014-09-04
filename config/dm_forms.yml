@@ -18,8 +18,10 @@
     :label: "Quantity"
   :startDate:
     :label: "Start Date"
+    :type: :date
   :endDate:
     :label: "End Date"
+    :type: :date
   :contractNumber:
     :label: "Contract Number"
 

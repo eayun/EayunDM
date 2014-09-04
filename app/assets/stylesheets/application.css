@@ -11,6 +11,7 @@
  * file per style scope.
  *
  *= require patternfly.min
+ *= require datepicker
  *= require_tree .
  *= require_self
  */

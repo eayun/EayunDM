@@ -14,6 +14,7 @@
 //= require jquery.dataTables
 //= require jquery_ujs
 //= require bootstrap.min
+//= require bootstrap-datepicker
 //= require patternfly.min
 //= require turbolinks
 //= require_tree .

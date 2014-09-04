@@ -24,6 +24,11 @@
       <%= text_field_tag key, field[:default], :class => "form-control" %>
     <% when :password %>
       <%= password_field_tag key, nil, :class => "form-control" %>
+    <% when :date %>
+      <div class="input-group date">
+        <%= text_field_tag key, nil, :class => "form-control" %>
+        <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+      </div>
     <% when :select %>
       <% if field[:choices].length > 0 %>
         <%= select_tag key, options_for_select(field[:choices]), :class => "form-control" %>
@@ -40,4 +45,6 @@
     </div>
   </div>
 </div>
-
+<script>
+$('.input-group.date').datepicker({todayHighlight: true, format: "yyyy-mm-dd", startDate: "today", autoclose: true});
+</script>
