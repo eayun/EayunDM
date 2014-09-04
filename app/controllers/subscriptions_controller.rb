@@ -11,6 +11,7 @@ class SubscriptionsController < ApplicationController
 
   def destroy
     CANDLEPIN.execute "delete_subscriptions", {:id => params[:id]}
+    CANDLEPIN.execute "put_owners_subscriptions", {:id => params[:owner_id]}, "", :content_type => :json
     redirect_to owner_subscriptions_url
   end
 
