@@ -1,5 +1,4 @@
 class OperationsController < ApplicationController
-  authorize_resource :class => false
 
   def create
     @operation = Operation.new(operation_params)

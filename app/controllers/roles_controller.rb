@@ -1,5 +1,4 @@
 class RolesController < ApplicationController
-  authorize_resource :class => false
 
   def new
     @role = Role.new

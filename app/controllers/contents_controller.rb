@@ -1,7 +1,6 @@
 require "json"
 
 class ContentsController < ApplicationController
-  authorize_resource :class => false
 
   def index
     super

@@ -1,7 +1,6 @@
 require "json"
 
 class ConsumersController < ApplicationController
-  authorize_resource :class => false
 
   def show
     consumer = CANDLEPIN.execute "get_consumers", {:id => params[:id]}

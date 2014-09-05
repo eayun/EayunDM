@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  authorize_resource :class => false
 
   def create
     User.create!(user_params)

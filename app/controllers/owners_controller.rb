@@ -2,7 +2,6 @@ require "json"
 require "digest/sha1"
 
 class OwnersController < ApplicationController
-  authorize_resource :class => false
 
   def create
     owner = [:key, :displayName, :contentPrefix].map {|k| [k, params[k]]}.to_h
