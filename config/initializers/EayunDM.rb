@@ -30,3 +30,6 @@ CONTENT_INFO = YAML.load_file("config/eayun_contents.yml")
 
 # DM forms initialization
 DM_FORMS = YAML.load_file("config/dm_forms.yml")
+
+# DM operation options initialization
+DM_OPERATION = YAML.load_file("config/dm_operations.yml")

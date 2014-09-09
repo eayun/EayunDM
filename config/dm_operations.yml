@@ -1,0 +1,16 @@
+controllers:
+  - user
+  - role
+  - operation
+  - consumer
+  - content
+  - dashboard
+  - owner
+  - product
+  - subscription
+
+actions:
+  - manage
+  - index
+  - show
+  - certificate
