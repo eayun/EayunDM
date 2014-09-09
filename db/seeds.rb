@@ -53,8 +53,6 @@ RoleOperation.create( :role_id => product_manager.id, :operation_id => manage_pr
 RoleOperation.create( :role_id => product_manager.id, :operation_id => manage_content.id )
 RoleOperation.create( :role_id => product_manager.id, :operation_id => manage_dash.id )
 RoleOperation.create( :role_id => technical_support.id, :operation_id => manage_consumer.id )
-RoleOperation.create( :role_id => technical_support.id, :operation_id => list_user.id )
-RoleOperation.create( :role_id => technical_support.id, :operation_id => show_user.id )
 RoleOperation.create( :role_id => technical_support.id, :operation_id => list_owner.id )
 RoleOperation.create( :role_id => technical_support.id, :operation_id => show_owner.id )
 RoleOperation.create( :role_id => technical_support.id, :operation_id => list_subscription.id )
